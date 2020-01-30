@@ -1,0 +1,23 @@
+plugins {
+    id 'org.springframework.boot' version "$springBootVersion"
+}
+
+sourceCompatibility = 11
+
+dependencies {
+
+    // dependencies on modules
+    implementation project(':client-couchbase')
+    //implementation project(':client-kafka')
+
+    // spring
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}

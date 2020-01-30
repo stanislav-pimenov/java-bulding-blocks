@@ -1,0 +1,14 @@
+//plugins {
+//    id 'org.springframework.boot' version "$springBootVersion" apply false
+//}
+
+sourceCompatibility = 11
+
+dependencies {
+    implementation 'com.couchbase.client:java-client:3.0.0'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    compile 'com.fasterxml.jackson.core:jackson-annotations'
+}
