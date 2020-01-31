@@ -22,6 +22,6 @@ public class CrudController {
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Object getById(String id) {
-    return couchbaseClient.testClientGet();
+    return couchbaseClient.testClient();
   }
 }

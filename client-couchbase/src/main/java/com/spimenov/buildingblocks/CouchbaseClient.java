@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @EnableConfigurationProperties(CouchbaseProperties.class)
 public class CouchbaseClient {
@@ -23,10 +25,14 @@ public class CouchbaseClient {
     this.bucket = this.cluster.bucket(couchbaseProperties.getBucket());
   }
 
-  public Object testClientGet() {
-    // Get Document using query
-    QueryResult queryResult = cluster.query(
-        "select br.* from `beer-sample` br USE KEYS [\"21st_amendment_brewery_cafe\"]");
+  public Object testClient() {
+
+    bucket
+        .defaultCollection()
+        .upsert("brewery_beername", new BeerSample(List.of("Kudrovo")));
+    QueryResult queryResult =
+        cluster.query("select br.* from `beer-sample` br USE KEYS [\"brewery_beername\"]");
+
     return queryResult.rowsAs(BeerSample.class);
   }
 
@@ -38,6 +44,6 @@ public class CouchbaseClient {
         .password("password")
         .bucket("beer-sample")
         .build());
-    System.out.println(couchbaseClient.testClientGet());
+    System.out.println(couchbaseClient.testClient());
   }
 }
