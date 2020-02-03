@@ -34,6 +34,7 @@ kafka-server-start /usr/local/etc/kafka/server.properties
 ```
 
 another terminal: create topic, connect with console produces
+
 ```
 kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic beer-test
 kafka-console-producer --broker-list localhost:9092 --topic beer-test
