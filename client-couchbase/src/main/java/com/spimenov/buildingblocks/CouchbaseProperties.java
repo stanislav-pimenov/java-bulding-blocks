@@ -1,7 +1,3 @@
-/*
- * Copyright (C) 2020 adidas AG.
- */
-
 package com.spimenov.buildingblocks;
 
 import lombok.AllArgsConstructor;

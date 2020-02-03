@@ -1,0 +1,5 @@
+kafka:
+  server: localhost:9092
+  group.id: listener
+  listener:
+    topic: beer-test
