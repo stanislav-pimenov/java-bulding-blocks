@@ -1,5 +1,15 @@
 kafka:
-  server: localhost:9092
-  group.id: listener
-  listener:
-    topic: beer-test
+  consumer:
+    topic-name: msg-topic
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: listener-group
+      max-poll-records: 10
+#      auto-offset-reset: earliest
+#      enable-auto-commit: false
+#      properties:
+#        session.timeout.ms: ${KAFKA_SESSION_TIMEOUT:11000}
+#        max.poll.interval.ms: ${KAFKA_MAX_POLL_INTERVAL:300100}

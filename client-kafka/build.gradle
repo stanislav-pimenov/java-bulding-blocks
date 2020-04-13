@@ -2,7 +2,7 @@ sourceCompatibility = 11
 
 dependencies {
     // dependencies on modules
-    implementation project(':client-couchbase')
+//    implementation project(':client-couchbase')
 
     // spring
     implementation 'org.springframework.boot:spring-boot-starter'
@@ -10,6 +10,11 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'org.springframework.kafka:spring-kafka-test'
 
-    compile 'com.fasterxml.jackson.core:jackson-databind'
+    //   compile 'com.fasterxml.jackson.core:jackson-databind'
+}
+
+test {
+    useJUnitPlatform()
 }

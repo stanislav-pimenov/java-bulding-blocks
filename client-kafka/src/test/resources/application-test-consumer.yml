@@ -1,0 +1,9 @@
+kafka:
+  consumer:
+    topic-name: test-topic
+
+spring:
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
