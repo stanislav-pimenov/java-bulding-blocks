@@ -13,3 +13,9 @@ spring:
 #      properties:
 #        session.timeout.ms: ${KAFKA_SESSION_TIMEOUT:11000}
 #        max.poll.interval.ms: ${KAFKA_MAX_POLL_INTERVAL:300100}
+
+logging:
+  level:
+    root: WARN
+    org.springframework.web: WARN
+    com.spimenov.buildingblocks: DEBUG

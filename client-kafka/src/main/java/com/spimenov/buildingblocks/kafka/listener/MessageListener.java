@@ -1,6 +1,8 @@
 package com.spimenov.buildingblocks.kafka.listener;
 
+import com.spimenov.buildingblocks.service.TestService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
@@ -21,20 +23,22 @@ public class MessageListener {
     return latch;
   }
 
+  @Autowired
+  private TestService testService;
+
   @KafkaListener(id = "batch-listener", topics = "${kafka.consumer.topic-name}",
       containerGroup = "${spring.kafka.consumer.group-id}")
   public void receive(List<MessageEvent> batchData,
       @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
       @Header(KafkaHeaders.OFFSET) List<Long> offsets) {
 
-    log.info("start of batch receive");
+    log.debug("start of batch receive");
     for (int i = 0; i < batchData.size(); i++) {
-      log.info("received message='{}' with partition-offset='{}-{}'", batchData.get(i),
+      log.info("handling message='{}' with partition-offset='{}-{}'", batchData.get(i),
           partitions.get(i), offsets.get(i));
-      // todo handle message
-
+      testService.doSmth(batchData.get(i));
       latch.countDown();
     }
-    log.info("end of batch receive");
+    log.debug("end of batch receive");
   }
 }
