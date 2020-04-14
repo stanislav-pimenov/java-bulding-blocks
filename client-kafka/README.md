@@ -18,7 +18,7 @@ public class NREBatchErrorHandler extends SeekToCurrentBatchErrorHandler {
 
 For the listener testing `spring-kafka-test` package was used with @EmbeddedKafka
 client-kafka/src/test/java/com/spimenov/buildingblocks/kafka/listener/MessageListenerTest.java
-[MessageListenerTest.java](client-kafka/src/test/java/com/spimenov/buildingblocks/kafka/listener/MessageListenerTest.java)
+[MessageListenerTest.java](src/test/java/com/spimenov/buildingblocks/kafka/listener/MessageListenerTest.java)
 
 ```java
 @EmbeddedKafka(topics = {"${kafka.consumer.topic-name}"}, partitions = 1,
@@ -38,5 +38,11 @@ Test scenarios covers success and common failure cases
 | shouldSkipFatalErrorWithoutRetryAndProceedWithNextBatch() | Verifies that exception included to the set of Not Retriable Exceptions doesn't lead to retry and the whole batch is discarded |
 
 ## Running the application 
+
+Run kafka within docker
+
+```shell script 
+docker-compose up
+```
 
 ## Benchmarking
