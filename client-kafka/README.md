@@ -16,9 +16,7 @@ public class NREBatchErrorHandler extends SeekToCurrentBatchErrorHandler {
 
 ### Tests
 
-For the listener testing `spring-kafka-test` package was used with @EmbeddedKafka
-client-kafka/src/test/java/com/spimenov/buildingblocks/kafka/listener/MessageListenerTest.java
-[MessageListenerTest.java](src/test/java/com/spimenov/buildingblocks/kafka/listener/MessageListenerTest.java)
+For the listener testing `spring-kafka-test` package was used with @EmbeddedKafka [MessageListenerTest.java](src/test/java/com/spimenov/buildingblocks/kafka/listener/MessageListenerTest.java)
 
 ```java
 @EmbeddedKafka(topics = {"${kafka.consumer.topic-name}"}, partitions = 1,
