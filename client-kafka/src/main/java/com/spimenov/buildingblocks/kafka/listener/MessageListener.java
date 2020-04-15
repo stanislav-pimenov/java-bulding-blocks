@@ -1,5 +1,8 @@
 package com.spimenov.buildingblocks.kafka.listener;
 
+import static org.springframework.util.CollectionUtils.isEmpty;
+
+import com.spimenov.buildingblocks.kafka.listener.MessageEvent.Message;
 import com.spimenov.buildingblocks.service.TestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Component
 @Slf4j
@@ -32,13 +37,25 @@ public class MessageListener {
       @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
       @Header(KafkaHeaders.OFFSET) List<Long> offsets) {
 
-    log.debug("start of batch receive");
-    for (int i = 0; i < batchData.size(); i++) {
-      log.info("handling message='{}' with partition-offset='{}-{}'", batchData.get(i),
-          partitions.get(i), offsets.get(i));
-      testService.doSmth(batchData.get(i));
-      latch.countDown();
+    log.info("batch receive start --> {} events", offsets.size());
+
+    IntStream
+        .range(0, batchData.size())
+        .forEach(i -> log.debug("batch receive detailed: partition-offset='{}-{}', message='{}'",
+            partitions.get(i), offsets.get(i), batchData.get(i)));
+
+    final List<Message> messages = batchData
+        .stream()
+        .flatMap(event -> event
+            .getMessages()
+            .stream())
+        .collect(Collectors.toList());
+    if (!isEmpty(messages)) {
+      testService.doSmth(messages);
     }
-    log.debug("end of batch receive");
+
+    offsets.forEach(o -> latch.countDown());
+
+    log.info("batch receive end <-- ");
   }
 }

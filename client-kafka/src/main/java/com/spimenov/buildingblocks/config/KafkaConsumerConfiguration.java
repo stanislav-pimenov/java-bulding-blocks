@@ -15,6 +15,7 @@ import org.springframework.kafka.config.KafkaListenerContainerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.BatchErrorHandler;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
+import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer2;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.util.backoff.FixedBackOff;
 
@@ -60,7 +61,7 @@ public class KafkaConsumerConfiguration {
   public DefaultKafkaConsumerFactory<String, MessageEvent> consumerFactory(KafkaProperties kafkaProperties) {
     Map<String, Object> configs = kafkaProperties.buildConsumerProperties();
     return new DefaultKafkaConsumerFactory<>(configs, new StringDeserializer(),
-        new JsonDeserializer<>(MessageEvent.class));
+        new ErrorHandlingDeserializer2<>(new JsonDeserializer<>(MessageEvent.class)));
   }
 
   /**
