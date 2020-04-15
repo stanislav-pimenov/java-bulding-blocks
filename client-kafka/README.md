@@ -86,17 +86,17 @@ For details see test plan [ShakeKafka](gatling-simulations/ShakeKafka.scala)
 1. Gatling successfully simulate 100 messages per seconds
 ![producer-statistics](gatling-simulations/producer-statistics.png)
 
-2. Sample listener output demonstrate how batches are organized are being handled:
+2. Sample listener output demonstrate batch handling:
 ```text
-2020-04-16 02:10:50.763  INFO 15270 --- [-listener-0-C-1] c.s.b.kafka.listener.MessageListener     : batch receive start --> 6 events
-2020-04-16 02:10:50.763 DEBUG 15270 --- [-listener-0-C-1] c.s.b.kafka.listener.MessageListener     : batch receive detailed: partition-offset='0-27111', message='MessageEvent(messages=[MessageEvent.Message(messageId=975930597, payload=some payload), MessageEvent.Message(messageId=975930597, payload=some additional payload)])'
-2020-04-16 02:10:50.763 DEBUG 15270 --- [-listener-0-C-1] c.s.b.kafka.listener.MessageListener     : batch receive detailed: partition-offset='0-27112', message='MessageEvent(messages=[MessageEvent.Message(messageId=568038235, payload=some payload), MessageEvent.Message(messageId=568038235, payload=some additional payload)])'
-2020-04-16 02:10:50.763 DEBUG 15270 --- [-listener-0-C-1] c.s.b.kafka.listener.MessageListener     : batch receive detailed: partition-offset='0-27113', message='MessageEvent(messages=[MessageEvent.Message(messageId=2010635110, payload=some payload), MessageEvent.Message(messageId=2010635110, payload=some additional payload)])'
-2020-04-16 02:10:50.763 DEBUG 15270 --- [-listener-0-C-1] c.s.b.kafka.listener.MessageListener     : batch receive detailed: partition-offset='1-27175', message='MessageEvent(messages=[MessageEvent.Message(messageId=1061513995, payload=some payload), MessageEvent.Message(messageId=1061513995, payload=some additional payload)])'
-2020-04-16 02:10:50.763 DEBUG 15270 --- [-listener-0-C-1] c.s.b.kafka.listener.MessageListener     : batch receive detailed: partition-offset='1-27176', message='MessageEvent(messages=[MessageEvent.Message(messageId=706584782, payload=some payload), MessageEvent.Message(messageId=706584782, payload=some additional payload)])'
-2020-04-16 02:10:50.763 DEBUG 15270 --- [-listener-0-C-1] c.s.b.kafka.listener.MessageListener     : batch receive detailed: partition-offset='1-27177', message='MessageEvent(messages=[MessageEvent.Message(messageId=33027849, payload=some payload), MessageEvent.Message(messageId=33027849, payload=some additional payload)])'
-2020-04-16 02:10:50.811  INFO 15270 --- [-listener-0-C-1] c.s.buildingblocks.service.TestService   : processing took: 47 ms
-2020-04-16 02:10:50.811  INFO 15270 --- [-listener-0-C-1] c.s.b.kafka.listener.MessageListener     : batch receive end <-- 
+2020-04-16 02:37:04.029  INFO 15500 --- [-listener-0-C-1] c.s.b.kafka.listener.MessageListener     : batch receive start --> 6 events
+2020-04-16 02:37:04.029 DEBUG 15500 --- [-listener-0-C-1] c.s.b.kafka.listener.MessageListener     : batch receive detailed: partition-offset='0-28094', message='MessageEvent(messages=[MessageEvent.Message(messageId=1194759632, payload=some payload), MessageEvent.Message(messageId=1194759632, payload=some additional payload)])'
+2020-04-16 02:37:04.029 DEBUG 15500 --- [-listener-0-C-1] c.s.b.kafka.listener.MessageListener     : batch receive detailed: partition-offset='0-28095', message='MessageEvent(messages=[MessageEvent.Message(messageId=526721650, payload=some payload), MessageEvent.Message(messageId=526721650, payload=some additional payload)])'
+2020-04-16 02:37:04.029 DEBUG 15500 --- [-listener-0-C-1] c.s.b.kafka.listener.MessageListener     : batch receive detailed: partition-offset='0-28096', message='MessageEvent(messages=[MessageEvent.Message(messageId=902667881, payload=some payload), MessageEvent.Message(messageId=902667881, payload=some additional payload)])'
+2020-04-16 02:37:04.029 DEBUG 15500 --- [-listener-0-C-1] c.s.b.kafka.listener.MessageListener     : batch receive detailed: partition-offset='1-28130', message='MessageEvent(messages=[MessageEvent.Message(messageId=1431203750, payload=some payload), MessageEvent.Message(messageId=1431203750, payload=some additional payload)])'
+2020-04-16 02:37:04.029 DEBUG 15500 --- [-listener-0-C-1] c.s.b.kafka.listener.MessageListener     : batch receive detailed: partition-offset='1-28131', message='MessageEvent(messages=[MessageEvent.Message(messageId=1931447009, payload=some payload), MessageEvent.Message(messageId=1931447009, payload=some additional payload)])'
+2020-04-16 02:37:04.029 DEBUG 15500 --- [-listener-0-C-1] c.s.b.kafka.listener.MessageListener     : batch receive detailed: partition-offset='1-28132', message='MessageEvent(messages=[MessageEvent.Message(messageId=1796278248, payload=some payload), MessageEvent.Message(messageId=1796278248, payload=some additional payload)])'
+2020-04-16 02:37:04.107  INFO 15500 --- [-listener-0-C-1] c.s.buildingblocks.service.TestService   : processing took: 78 ms
+2020-04-16 02:37:04.107  INFO 15500 --- [-listener-0-C-1] c.s.b.kafka.listener.MessageListener     : batch receive end <-- 
 ```
 
 3. Batch size never rich it maximum = 10 meaning that 1 consumer instance is enough to handle 100 messages per second

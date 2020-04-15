@@ -6,7 +6,7 @@ sourceCompatibility = 11
 
 dependencies {
     // dependencies on modules
-//    implementation project(':client-couchbase')
+//    implementation project(':client-mysql')
 
     // spring
     implementation 'org.springframework.boot:spring-boot-starter'
@@ -15,8 +15,7 @@ dependencies {
     }
     implementation 'org.springframework.kafka:spring-kafka'
     implementation 'org.springframework.kafka:spring-kafka-test'
-
-    //   compile 'com.fasterxml.jackson.core:jackson-databind'
+    compile 'org.apache.commons:commons-math3:3.5'
 }
 
 test {
