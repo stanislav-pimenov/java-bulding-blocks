@@ -69,7 +69,7 @@ To be installed:
 
 ### Test plan
 
-- Batch handling time is a normal distribution with mean 50ms and standard deviation 15ms
+- Batch handling time is a normal distribution with mean 50ms and standard deviation 10ms
 - Producer send 100 messages per second
 - Kafka topic partitions = 2
 - Consumer instances = 1 (consume from both partitions)
@@ -99,6 +99,6 @@ For details see test plan [ShakeKafka](gatling-simulations/ShakeKafka.scala)
 2020-04-16 02:37:04.107  INFO 15500 --- [-listener-0-C-1] c.s.b.kafka.listener.MessageListener     : batch receive end <-- 
 ```
 
-3. Batch size never rich it maximum = 10 meaning that 1 consumer instance is enough to handle 100 messages per second
+3. Batch size never rich its maximum = 10 meaning that 1 consumer instance is enough to handle 100 messages per second
 
 
