@@ -1,6 +1,6 @@
 # Kafka project skeleton
 
-## Adout this project
+## About this project
 
 ### Exception handling
 
@@ -37,10 +37,25 @@ Test scenarios covers success and common failure cases
 
 ## Running the application 
 
-Run kafka within docker
-
+1. Run kafka within docker
 ```shell script 
 docker-compose up
+```
+
+2. Create topic 
+```shell script
+kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 2 --topic msg-test
+```
+
+3. Run the listener
+```shell script
+./gradlew client-kafka:bootRun
+```
+
+4. Send test message
+```shell script
+kafka-console-producer --broker-list localhost:9092 --topic msg-topic
+> {"messages": [{"messageId": 1, "payload": "string"}, {"messageId": 2, "payload": "string2"}]}
 ```
 
 ## Benchmarking
