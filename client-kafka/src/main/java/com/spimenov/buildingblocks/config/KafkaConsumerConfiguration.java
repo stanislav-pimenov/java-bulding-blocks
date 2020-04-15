@@ -17,7 +17,7 @@ import org.springframework.kafka.listener.BatchErrorHandler;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer2;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
-import org.springframework.util.backoff.FixedBackOff;
+import org.springframework.util.backoff.ExponentialBackOff;
 
 import java.util.Map;
 
@@ -72,7 +72,7 @@ public class KafkaConsumerConfiguration {
   @Bean
   public BatchErrorHandler errorHandler() {
     final NREBatchErrorHandler errorHandler = new NREBatchErrorHandler();
-    errorHandler.setBackOff(new FixedBackOff(1000, 5));
+    errorHandler.setBackOff(new ExponentialBackOff(1000, 2));
     return errorHandler;
   }
 }
