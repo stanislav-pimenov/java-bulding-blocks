@@ -3,3 +3,5 @@ rootProject.name = 'building-blocks'
 include 'client-kafka'
 include 'client-couchbase'
 include 'service-api'
+include 'client-mysql'
+
